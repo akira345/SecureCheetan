@@ -1,0 +1,13 @@
+<form method="post" action="edit.php?id=<?php print $data["data"]["id"]; ?>">
+<font color="red"><?php print $data["errmsg"]; ?></font>
+TITLE<br>
+<input type="text" name="blog/title"
+ value="<?php print $s->html( $data["data"]["title"] ); ?>"><br>
+BODY<br>
+<textarea cols=40 rows=6 name="blog/body">
+<?php print $s->html( $data["data"]["body"] ); ?></textarea><br>
+<input type="hidden" name="blog/id"
+ value="<?php print $data["data"]["id"]; ?>">
+<input type="submit" value="UPDATE">
+</form>
+<a href=".">back</a>
