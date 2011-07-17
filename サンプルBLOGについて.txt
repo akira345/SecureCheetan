@@ -3,4 +3,35 @@
 
 ＊ディレクトリはMVCを分かり易くする為に分けております。こうしないと動作しない訳では有りません
 
+コントローラクラスの拡張(extent_controler.php)
+以下のメソッド追加
+chk_encoding
+setEncoding
+getEncoding
+isPost
+getHost
+isSsl
+getRequestUri
+getBaseUrl
+getPathInfo
+generateCsrfToken
+checkCsrfToken
+
+
+以下のメソッドを拡張
+set
+GetSqlLog
+redirect
+RequestHandle
+
+
+バリデートクラスの拡張(extent_validate.php)
+以下のメソッドを追加
+chk_url
+
+サニタイズクラスの拡張(extent_sanitize.php)
+以下のメソッドを拡張
+html
+
+
 

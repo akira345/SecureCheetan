@@ -7,9 +7,14 @@ class CMySanitize extends CSanitize
 		//コンストラクタ
 
     }
+	/**
+	*何もしない。setメソッドでビューに渡すときにサニタイズを行っている
+	*@param string $data
+	*
+	*@return string
+	*/
 	function html( $data )
 	{
-	//入力段階ではサニタイズしない。（setメソッドでビューに渡すときに行っている）
 		return $data;
 	}
 }

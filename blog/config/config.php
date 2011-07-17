@@ -81,58 +81,6 @@ function config_controller( &$controller )
 	$controller->SetTemplateFile( dirname(__FILE__) ."/../view/template.html" );
 }
 
-//ちいたんのコントローラクラスを拡張する
-function config_controller_class()
-{
-    require_once( 'extent_controler.php' );
-    return 'CMyController';
-}
-//ちいたんのビュークラスを拡張する
-function config_view_class()
-{
-//上のように別ファイルにしてrequireしてもOK
-
-//コントローラのGetSqlLogでエスケープしているのでそのまま渡す
-    class CMyView extends CView
-    {
-		function SetSqlLog( $sqllog )
-		{
-			if( $this->debug )
-			{
-				$log	= '<table class="cheetan_sql_log">'
-						. '<tr>'
-						. '<th width="60%">SQL</th>'
-						. '<th width="10%">ERROR</th>'
-						. '<th width="10%">ROWS</th>'
-						. '<th width="10%">TIME</th>'
-						. '</tr>'
-						;
-				foreach( $sqllog as $name => $rows )
-				{
-					$log	.= '<tr>'
-							. '<td colspan="4"><b>' . $name . '</b></td>'
-							. '</tr>'
-							;
-					foreach( $rows as $i => $row )
-					{
-						$log	.= '<tr>'
-								. '<td>' . $row['query'] . '</td>'
-								. '<td>' . $row['error'] . '</td>'
-								. '<td>' . $row['affected_rows'] . '</td>'
-								. '<td>' . sprintf( '%.5f', $row['query_time'] ) . '</td>'
-								. '</tr>'
-								;
-					}
-				}
-				$log	.= '</table>';
-				$this->variables['cheetan_sql_log'] = $log;
-			}
-		}
-
-    }
-    return 'CMyView';
-}
-
 //アクションが呼ばれた直後に呼ばれる関数です。
 //ここでは、header関数で文字コードの送信を行っています。
 function after_action( &$controller )
@@ -177,7 +125,8 @@ function after_session_start( &$controller )
 }
 
 
-//////////////////////////////////////////
+//ちいたんを拡張する
+
 //ちいたんのサニタイズクラスを拡張する
 function config_sanitize_class()
 {
@@ -190,7 +139,18 @@ function config_validate_class()
     require_once( 'extent_validate.php' );
     return 'CMyValidate';
 }
-
+//ちいたんのコントローラクラスを拡張する
+function config_controller_class()
+{
+    require_once( 'extent_controler.php' );
+    return 'CMyController';
+}
+//ちいたんのビュークラスを拡張する
+function config_view_class()
+{
+    require_once( 'extent_view.php' );
+    return 'CMyView';
+}
 
 
 

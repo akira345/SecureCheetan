@@ -9,8 +9,8 @@ class Session
     /**
      * 指定したセッション変数の値をセット
      *
-     * @param string $key string $value
-     * 
+     * @param string $key 
+     * @param string $value
      */
 	function set($key,$value)
 	{
