@@ -1,11 +1,11 @@
-<?php
-//ÀßÄê¥Õ¥¡¥¤¥ë¤È¥Õ¥ì¡¼¥à¥ï¡¼¥¯¤òÆÉ¤ß¹þ¤à
+ï»¿<?php
+//è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«ã¨ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¯ãƒ¼ã‚¯ã‚’èª­ã¿è¾¼ã‚€
     require_once( "./config/config.php" );
     require_once( "../cheetan/cheetan.php" );
 
 function action( &$c )
 {
-//¥¢¥¯¥·¥ç¥ó
+//ã‚¢ã‚¯ã‚·ãƒ§ãƒ³
 	$errmsg	= "";
     if( count( $_POST ) )
     {
@@ -18,7 +18,7 @@ function action( &$c )
     }
 	
 	$c->set( "errmsg", $errmsg ,"TRUE" );
-	//¥Æ¥ó¥×¥ì¡¼¥ÈÀßÄê
+	//ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆè¨­å®š
 	$c->SetViewFile( "./view/add.html");
 
 }

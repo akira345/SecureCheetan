@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 class CCheetan_session extends CModel
 {
 	function CCheetan_session()

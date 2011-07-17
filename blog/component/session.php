@@ -1,9 +1,9 @@
-<?php
+ï»¿<?php
 class Session
 {
 	protected $secret_words;
 
-//¥Ñ¡¼¥Õ¥§¥¯¥ÈPHP¤ÎSession¥¯¥é¥¹¤ò»²¹Í¤Ë¤·¤Ş¤·¤¿¡£
+//ãƒ‘ãƒ¼ãƒ•ã‚§ã‚¯ãƒˆPHPã®Sessionã‚¯ãƒ©ã‚¹ã‚’å‚è€ƒã«ã—ã¾ã—ãŸã€‚
 	function set($key,$value)
 	{
 		$_SESSION[$key] = $value;
@@ -25,8 +25,8 @@ class Session
 		session_regenerate_id($flg);
 		$this->chk_session;
 	}
-	//http://www.asahi-net.or.jp/~wv7y-kmr/memo/php_security.html#PHP_Session¤è¤ê
-	//¥»¥Ã¥·¥ç¥óID¤ÎÂÅÅöÀ­¤ò¥Á¥§¥Ã¥¯¤¹¤ë¡£
+	//http://www.asahi-net.or.jp/~wv7y-kmr/memo/php_security.html#PHP_Sessionã‚ˆã‚Š
+	//ã‚»ãƒƒã‚·ãƒ§ãƒ³IDã®å¦¥å½“æ€§ã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹ã€‚
 	private function chk_sessionid()
 	{
 		$session_id = session_id();

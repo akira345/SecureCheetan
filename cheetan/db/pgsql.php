@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /*-----------------------------------------------------------------------------
 cheetan is licensed under the MIT license.
 copyright (c) 2006 cheetan all right reserved.
@@ -12,7 +12,7 @@ class CDBPgsql extends CDBCommon
 		if( empty( $config['port'] ) )	$config['port'] = 5432;
 		$connect	= pg_connect( "host={$config['host']} port={$config['port']} dbname={$config['db']} user={$config['user']} password={$config['pswd']}" );
 		//akira add
-		pg_set_client_encoding($connect,$config['chrset']) or die ("Failt Set Charset");
+		pg_set_client_encoding($connect,$config['chrset']) or die ("Failed to set the character encoding of the database.");
 		return $connect;
 	}
 	

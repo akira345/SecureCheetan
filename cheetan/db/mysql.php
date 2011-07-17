@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /*-----------------------------------------------------------------------------
 cheetan is licensed under the MIT license.
 copyright (c) 2006 cheetan all right reserved.
@@ -16,7 +16,7 @@ class CDBMysql extends CDBCommon {
 		if($connect) {
 			mysql_select_db($config['db'], $connect);
 			//add by akira
-			mysql_set_charset($config['chrset'], $connect) or die ("Falit Set Charset");
+			mysql_set_charset($config['chrset'], $connect) or die ("Failed to set the character encoding of the database.");
 		}
 		return $connect;
 	}

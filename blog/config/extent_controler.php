@@ -1,18 +1,18 @@
-<?php
-//¤Á¤¤¤¿¤ó¤Î¥³¥ó¥È¥í¡¼¥é¥¯¥é¥¹¤ò³ÈÄ¥¤¹¤ë¡£
+ï»¿<?php
+//ã¡ã„ãŸã‚“ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ã‚¯ãƒ©ã‚¹ã‚’æ‹¡å¼µã™ã‚‹ã€‚
 class CMyController extends CController
 {
-	protected $encoding = "EUC-JP";	//¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°
+	protected $encoding = "UTF-8";	//ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°
 
     function CMyController()
     {
-		//¥³¥ó¥¹¥È¥é¥¯¥¿
+		//ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		CController::CController();
     }
 
 	function chk_encoding()
 	{
-		//³°¤«¤éÍè¤ëÊÑ¿ô¤ÎÊ¸»ú¥³¡¼¥É¤ò¥Á¥§¥Ã¥¯¤¹¤ë
+		//å¤–ã‹ã‚‰æ¥ã‚‹å¤‰æ•°ã®æ–‡å­—ã‚³ãƒ¼ãƒ‰ã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹
 		$vars = array($_GET, $_POST, $_COOKIE, $_SERVER, $_REQUEST);
 		array_walk_recursive($vars, array($this,"_validate_encoding"));
 	}
@@ -24,9 +24,9 @@ class CMyController extends CController
 	    }
 	}
 
-	function setEncoding($encode = "EUC-JP"){//¥Ç¥Õ¥©¥ë¥È¤Ï£Å£Õ£Ã¤Ë¤¹¤ë
+	function setEncoding($encode = "UTF-8"){//ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã¯UTF-8ã«ã™ã‚‹
 		$this->encoding = $encode;
-	//htmlentities¤ähtml¤ÎÊ¸»ú¥³¡¼¥É»ØÄê¤Ç»È¤¨¤ëÊ¸»ú¥³¡¼¥É»ØÄê¤«¥Á¥§¥Ã¥¯
+	//htmlentitiesã‚„htmlã®æ–‡å­—ã‚³ãƒ¼ãƒ‰æŒ‡å®šã§ä½¿ãˆã‚‹æ–‡å­—ã‚³ãƒ¼ãƒ‰æŒ‡å®šã‹ãƒã‚§ãƒƒã‚¯
 		$chars = array(	"ISO-8859-1",
 						"ISO-8859-15",
 						"UTF-8",
@@ -45,7 +45,7 @@ class CMyController extends CController
 		return $this->encoding;
 	}
 	function setEscape($value){
-	//http://soft.fpso.jp/develop/php/entry_1891.html¤ò»²¹Í¤ËºîÀ®¤·¤Æ¤ß¤¿
+	//http://soft.fpso.jp/develop/php/entry_1891.htmlã‚’å‚è€ƒã«ä½œæˆã—ã¦ã¿ãŸ
 		if (is_string($value) === true) {
 			$value = htmlentities($value, ENT_QUOTES,$this->encoding);
 		} elseif (is_array($value) === true) {
@@ -56,8 +56,8 @@ class CMyController extends CController
 
 	function set( $name, $value, $out_tag_flg = FALSE )
 	{
-		//½ĞÎÏ»ş¤Ëhtmlentities¤òÄÌ¤¹¡£¤¿¤À¤·¡¢
-		//¥¿¥°½ĞÎÏ¥Õ¥é¥°¤¬ON¤Î¾ì¹ç¤Ï¥¹¥ë¡¼¤¹¤ë
+		//å‡ºåŠ›æ™‚ã«htmlentitiesã‚’é€šã™ã€‚ãŸã ã—ã€
+		//ã‚¿ã‚°å‡ºåŠ›ãƒ•ãƒ©ã‚°ãŒONã®å ´åˆã¯ã‚¹ãƒ«ãƒ¼ã™ã‚‹
 		If ($out_tag_flg == FALSE){
 			$this->variables[$name] = $this->setEscape($value);
 		}else{
@@ -65,9 +65,14 @@ class CMyController extends CController
 		}
 	}
 
+	function GetSqlLog()
+	{
+		return $this->setEscape($this->db->GetSqlLog());
+	}
+
 	function redirect( $url, $is301 = FALSE )
 	{
-	#¥Ñ¡¼¥Õ¥§¥¯¥ÈPHP¤è¤ê°ìÉôÇÒ¼Ú
+	#ãƒ‘ãƒ¼ãƒ•ã‚§ã‚¯ãƒˆPHPã‚ˆã‚Šä¸€éƒ¨æ‹å€Ÿ
 
         if (!preg_match('#https?://#', $url)) {
             $protocol = $this->isSsl() ? 'https://' : 'http://';
@@ -81,7 +86,7 @@ class CMyController extends CController
 		{
 			header( "HTTP/1.1 301 Moved Permanently" );
 		}
-		###madhatter¤µ¤ó¤Î¥³¡¼¥É¤òÇÒ¼Ú¤·¡¢°ìÉô½¤Àµ
+		###madhatterã•ã‚“ã®ã‚³ãƒ¼ãƒ‰ã‚’æ‹å€Ÿã—ã€ä¸€éƒ¨ä¿®æ­£
 		if(!$_COOKIE[session_name()]){
 			$url .= ( strpos($url, "?") != false ? "&" : "?" ) . urlencode(session_name()) . "=" . $this->setEscape(session_id());
 		}
@@ -103,13 +108,13 @@ class CMyController extends CController
 		$this->ModelItemHandle($get);
 		$this->ModelItemHandle($post);
 	}
-
+	//å¤–éƒ¨ã‹ã‚‰æ¥ã‚‹å¤‰æ•°ã®ãƒãƒªãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ã‚’è¡Œã†
 	private function _validate($value){
 		$value = $this->delete_null_byte($value);
 		return $value;
 	}
 
-	#¥Ñ¡¼¥Õ¥§¥¯¥ÈPHP¤è¤ênull¥Ğ¥¤¥È½üµî
+	#ãƒ‘ãƒ¼ãƒ•ã‚§ã‚¯ãƒˆPHPã‚ˆã‚Šnullãƒã‚¤ãƒˆé™¤å»
 
 	function delete_null_byte($value)
 	{
@@ -126,7 +131,7 @@ class CMyController extends CController
  * @author Katsuhiro Ogawa <fivestar@nequal.jp>
  */
     /**
-     * ¥ê¥¯¥¨¥¹¥È¥á¥½¥Ã¥É¤¬POST¤«¤É¤¦¤«È½Äê
+     * ãƒªã‚¯ã‚¨ã‚¹ãƒˆãƒ¡ã‚½ãƒƒãƒ‰ãŒPOSTã‹ã©ã†ã‹åˆ¤å®š
      *
      * @return boolean
      */
@@ -139,7 +144,7 @@ class CMyController extends CController
         return false;
     }
     /**
-     * ¥Û¥¹¥ÈÌ¾¤ò¼èÆÀ
+     * ãƒ›ã‚¹ãƒˆåã‚’å–å¾—
      *
      * @return string
      */
@@ -153,7 +158,7 @@ class CMyController extends CController
     }
 
     /**
-     * SSL¤Ç¥¢¥¯¥»¥¹¤µ¤ì¤¿¤«¤É¤¦¤«È½Äê
+     * SSLã§ã‚¢ã‚¯ã‚»ã‚¹ã•ã‚ŒãŸã‹ã©ã†ã‹åˆ¤å®š
      *
      * @return boolean
      */
@@ -166,7 +171,7 @@ class CMyController extends CController
     }
 
     /**
-     * ¥ê¥¯¥¨¥¹¥ÈURI¤ò¼èÆÀ
+     * ãƒªã‚¯ã‚¨ã‚¹ãƒˆURIã‚’å–å¾—
      *
      * @return string
      */
@@ -176,7 +181,7 @@ class CMyController extends CController
     }
 
     /**
-     * ¥Ù¡¼¥¹URL¤ò¼èÆÀ
+     * ãƒ™ãƒ¼ã‚¹URLã‚’å–å¾—
      *
      * @return string
      */
@@ -196,7 +201,7 @@ class CMyController extends CController
     }
 
     /**
-     * PATH_INFO¤ò¼èÆÀ
+     * PATH_INFOã‚’å–å¾—
      *
      * @return string
      */
@@ -214,7 +219,7 @@ class CMyController extends CController
         return $path_info;
     }
     /**
-     * CSRF¥È¡¼¥¯¥ó¤òÀ¸À®
+     * CSRFãƒˆãƒ¼ã‚¯ãƒ³ã‚’ç”Ÿæˆ
      *
      * @param string $form_name
      * @return string $token
@@ -223,7 +228,7 @@ class CMyController extends CController
     {
         $key = 'csrf_tokens/' . $form_name;
         $tokens = isset($_SESSION[$key]) ? $_SESSION[$key] : array();
-        if (count($tokens) >= 10) {	//Æ±»ş¤Ë£±£°¸Ä¤Ş¤Ç¤ÏÊİ»ı¤¹¤ë¡£Ä¶¤¨¤¿¤é¸Å¤¤Êª¤«¤é¾Ã¤¹
+        if (count($tokens) >= 10) {	//åŒæ™‚ã«ï¼‘ï¼å€‹ã¾ã§ã¯ä¿æŒã™ã‚‹ã€‚è¶…ãˆãŸã‚‰å¤ã„ç‰©ã‹ã‚‰æ¶ˆã™
             array_shift($tokens);
         }
 
@@ -236,7 +241,7 @@ class CMyController extends CController
     }
 
     /**
-     * CSRF¥È¡¼¥¯¥ó¤¬ÂÅÅö¤«¥Á¥§¥Ã¥¯
+     * CSRFãƒˆãƒ¼ã‚¯ãƒ³ãŒå¦¥å½“ã‹ãƒã‚§ãƒƒã‚¯
      *
      * @param string $form_name
      * @param string $token

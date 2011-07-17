@@ -1,4 +1,4 @@
-<p>
+﻿<p>
 <a href="add.php">Write new</a>
 </p>
 
@@ -15,7 +15,7 @@
     <td><?php print str_replace( "\n", "<br>", $s->html( $data["body"] ) ); ?></td>
   </tr>
   <tr>
-    <td><?php print InitTime( $data["modified"] ); ?></td>
+    <td><?php print $c->common->InitTime( $data["modified"] ); ?></td>
   </tr>
 </table>
 <br>

@@ -1,12 +1,12 @@
-<?php
-//¤Á¤¤¤¿¤ó¤Î¥Ð¥ê¥Ç¡¼¥È¥¯¥é¥¹¤ò³ÈÄ¥¤¹¤ë¡£
+ï»¿<?php
+//ã¡ã„ãŸã‚“ã®ãƒãƒªãƒ‡ãƒ¼ãƒˆã‚¯ãƒ©ã‚¹ã‚’æ‹¡å¼µã™ã‚‹ã€‚
 class CMyValidate extends CValidate
 {
     function CMyValidate()
     {
-		//¥³¥ó¥¹¥È¥é¥¯¥¿
+		//ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     }
-	//URL¤ò¹½À®¤¹¤ë¤«¥Á¥§¥Ã¥¯¤¹¤ë
+	//URLã‚’æ§‹æˆã™ã‚‹ã‹ãƒã‚§ãƒƒã‚¯ã™ã‚‹
 	function chk_url($data,$errmsg = ""){
 		return $this->_check(preg_match('/^(https?|ftp)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)$/',$data),$errmsg);
 	}

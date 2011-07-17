@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 class CBlog_data extends CModel
 {
 	var $validatefunc	= array(
