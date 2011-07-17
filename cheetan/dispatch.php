@@ -60,7 +60,7 @@ class CDispatch extends CObject
 		if( !function_exists( 'is_session' ) || is_session() )
 		{
 //akira modified start
-			if (function_exists( 'after_session_start' )){
+			if (function_exists( 'before_session_start' )){
 				after_session_start( $controller);
 			}
 			$controller->SetSessionstart();

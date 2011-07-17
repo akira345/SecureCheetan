@@ -1,6 +1,7 @@
 ﻿<?php
 class Common
 {
+//コンポーネント呼び出しサンプル
 	function InitTime( $time )
 	{
 		$year	= substr( $time, 0, 4 );

@@ -3,28 +3,48 @@
 class CMyController extends CController
 {
 	protected $encoding = "UTF-8";	//エンコーディング
-
+    /**
+     * コンストラクタ
+     *
+     * 
+     *  
+     */
     function CMyController()
     {
 		//コンストラクタ
 		CController::CController();
     }
-
-	function chk_encoding()
+    /**
+     * 外から来る変数の文字コードをチェックする
+     *
+     * 
+     *  @return boolian
+     */
+	public function chk_encoding()
 	{
 		//外から来る変数の文字コードをチェックする
 		$vars = array($_GET, $_POST, $_COOKIE, $_SERVER, $_REQUEST);
 		array_walk_recursive($vars, array($this,"_validate_encoding"));
 	}
-
+    /**
+     * 文字コードをチェックする
+     *
+     * @param string $val 
+     *  @param string $key
+     */
 	private function _validate_encoding($val, $key) {
 	    if (!mb_check_encoding($key,$this->encoding) || !mb_check_encoding($val,$this->encoding)) {
 	        trigger_error('Invalid charactor encoding detected.');
 	        exit;
 	    }
 	}
-
-	function setEncoding($encode = "UTF-8"){//デフォルトはUTF-8にする
+    /**
+     * viewの文字コードをセットする
+     *
+     * @param string $encode
+     * @return boolian
+     */
+	public function setEncoding($encode = "UTF-8"){//デフォルトはUTF-8にする
 		$this->encoding = $encode;
 	//htmlentitiesやhtmlの文字コード指定で使える文字コード指定かチェック
 		$chars = array(	"ISO-8859-1",
@@ -41,20 +61,37 @@ class CMyController extends CController
 		in_array(strtoupper($this->encoding),$chars) or die ("Unknown charset");
 
 	}
-	function getEncoding(){
+    /**
+     * viewの文字コードを取得する
+     *
+     * 
+     * @return string
+     */
+	public function getEncoding(){
 		return $this->encoding;
 	}
-	function setEscape($value){
+    /**
+     * 文字列のサニタイズを行う
+     *
+     * @param string $value
+     * @return boolian
+     */
+	private function _setEscape($value){
 	//http://soft.fpso.jp/develop/php/entry_1891.htmlを参考に作成してみた
 		if (is_string($value) === true) {
 			$value = htmlentities($value, ENT_QUOTES,$this->encoding);
 		} elseif (is_array($value) === true) {
-			$value = array_map(array($this,"setEscape"),$value);
+			$value = array_map(array($this,"_setEscape"),$value);
 		}
 		return $value;
 	}
-
-	function set( $name, $value, $out_tag_flg = FALSE )
+    /**
+     * ビューに値をセットする
+     *
+     * @param string $name, string $value, boolian $out_tag_flg
+     * 
+     */
+	public function set( $name, $value, $out_tag_flg = FALSE )
 	{
 		//出力時にhtmlentitiesを通す。ただし、
 		//タグ出力フラグがONの場合はスルーする
@@ -64,13 +101,23 @@ class CMyController extends CController
 			$this->variables[$name]	= $value;
 		}
 	}
-
-	function GetSqlLog()
+    /**
+     * SQLのLOGを取得する(デバックモード時のみ)
+     *
+     * 
+     * @return string
+     */
+	public function GetSqlLog()
 	{
-		return $this->setEscape($this->db->GetSqlLog());
+		return $this->_setEscape($this->db->GetSqlLog());
 	}
-
-	function redirect( $url, $is301 = FALSE )
+    /**
+     * リダイレクトを行う
+     *
+     * @param string $url, boolian $is301
+     * 
+     */
+	public function redirect( $url, $is301 = FALSE )
 	{
 	#パーフェクトPHPより一部拝借
 
@@ -88,15 +135,20 @@ class CMyController extends CController
 		}
 		###madhatterさんのコードを拝借し、一部修正
 		if(!$_COOKIE[session_name()]){
-			$url .= ( strpos($url, "?") != false ? "&" : "?" ) . urlencode(session_name()) . "=" . $this->setEscape(session_id());
+			$url .= ( strpos($url, "?") != false ? "&" : "?" ) . urlencode(session_name()) . "=" . $this->_setEscape(session_id());
 		}
 		###
 
 		header( "Location: " . $url );
 		exit();
 	}
-
-	function RequestHandle()
+    /**
+     * リクエストハンドラ
+     *
+     * 
+     * 
+     */
+	private function RequestHandle()
 	{
 		$get	 = $this->_validate($_GET);
 		$post	 = $this->_validate($_POST);
@@ -108,16 +160,25 @@ class CMyController extends CController
 		$this->ModelItemHandle($get);
 		$this->ModelItemHandle($post);
 	}
-	//外部から来る変数のバリテーションを行う
+    /**
+     * 外部から来る変数のバリテーションを行う
+     *
+     * @param string $value
+     * @return string
+     */
 	private function _validate($value){
-		$value = $this->delete_null_byte($value);
+		$value = $this->_delete_null_byte($value);
 		return $value;
 	}
-
-	#パーフェクトPHPよりnullバイト除去
-
-	function delete_null_byte($value)
+    /**
+     * nullbyteの除去を行う
+     *
+     * @param string $value
+     * @return string
+     */
+	private function _delete_null_byte($value)
 	{
+	#パーフェクトPHPよりnullバイト除去
 		if (is_string($value) === true) {
 			$value = str_replace("\0","",$value);
 		} elseif (is_array($value) === true) {
@@ -125,11 +186,7 @@ class CMyController extends CController
 		}
 		return $value;
 	}
-/**
- * Request.
- *
- * @author Katsuhiro Ogawa <fivestar@nequal.jp>
- */
+
     /**
      * リクエストメソッドがPOSTかどうか判定
      *

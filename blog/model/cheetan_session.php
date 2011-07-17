@@ -1,6 +1,7 @@
 ﻿<?php
 class CCheetan_session extends CModel
 {
+//ちいたんDBセッション拡張モデル
 	function CCheetan_session()
 	{
 		CModel::CModel();
