@@ -1,8 +1,9 @@
-﻿<?php
+<?php
 /*-----------------------------------------------------------------------------
 cheetan is licensed under the MIT license.
 copyright (c) 2006 cheetan all right reserved.
 http://php.cheetan.net/
+fix by akira
 -----------------------------------------------------------------------------*/
 class CDBCommon extends CObject
 {
@@ -182,7 +183,8 @@ class CDBCommon extends CObject
 	}
 	
 	
-	function describe($table) {
+//fix by akira	function describe($table) {
+	function describe($table,$name) {
 		return null;
 	}
 	

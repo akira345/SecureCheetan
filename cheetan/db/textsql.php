@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 define( "TEXTDB_CR", "##CR##" );
 define( "TEXTDB_LF", "##LF##" );

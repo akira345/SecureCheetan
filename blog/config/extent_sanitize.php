@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 //ちいたんのサニタイズクラスを拡張する。
 class CMySanitize extends CSanitize
 {
@@ -20,4 +20,3 @@ class CMySanitize extends CSanitize
 }
 
 
-?>

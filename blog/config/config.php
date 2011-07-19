@@ -1,11 +1,11 @@
-﻿<?php
+<?php
 
 //セッションを使用するかどうかを設定します。
 //デフォルト(関数を宣言しない時)はセッションを使用するので、
 //使用したくない時は関数を宣言し、falseを返してください。
 function is_session()
 {
-	return false;
+	return true;
 }
 
 //DBの接続設定関数
@@ -53,8 +53,8 @@ function config_components( &$controller )
 //コントローラでの使用方法はこんな感じ
 //$c->lib->bar( $in_str );foobarではアクセス出来ない
 
-	$controller->AddComponent(  dirname(__FILE__) . "/../component/common.php", 'Common');
-	$controller->AddComponent(  dirname(__FILE__) . "/../component/session.php", 'Session');
+	$controller->AddComponent(  dirname(__FILE__) . "/../component/Common.php", 'Common');
+	$controller->AddComponent(  dirname(__FILE__) . "/../component/Session.php", 'Session');
 
 }
 
@@ -62,7 +62,7 @@ function config_components( &$controller )
 //全コントローラ共通で前処理をさせたい場合ここに設定する
 function config_controller( &$controller )
 {
-	if($controller->GetSession)
+	if($controller->GetSessionstart())
 	{
 		//セッションの妥当性をチェックする。
 		$controller->session->set_secret_words("hogehogefoobar");	//フィンガープリントの秘密の文字列
@@ -86,7 +86,7 @@ function config_controller( &$controller )
 function after_action( &$controller )
 {
 	//文字コード設定
-	header( 'Content-Type: text/html; charset=' . $controller->getEncoding  );
+	header("Content-Type: text/html; charset=" . $controller->getEncoding());
 	//キャッシュさせない
 	header("Expires: Wed, 10 Jan 1990 01:01:01 GMT");
 	header("Last-Modified: ". gmdate("D, d M Y H:i:s"). " GMT");
@@ -117,7 +117,7 @@ function check_secure( &$controller )
 //セッションが有効の時動く
 //session_startの前に処理をしたい場合追加
 //関数が未定義の場合は、session_start()が呼ばれる
-function after_session_start( &$controller )
+function before_session_start( &$controller )
 {
 	//セッション名を変更してみる
 	session_name ("BlogID");

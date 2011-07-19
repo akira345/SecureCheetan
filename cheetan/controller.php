@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /*-----------------------------------------------------------------------------
 cheetan is licensed under the MIT license.
 copyright (c) 2006 cheetan all right reserved.
@@ -46,7 +46,8 @@ class CController extends CObject
 		else
 		{
 			require_once( $path );
-			$class = &new $cname();
+//modified by akira			$class = &new $cname();
+			$class = new $cname();
 			if( !$class->table )	$class->table = $name;
 			$class->SetController( $this );
 			$this->m[$name]	= &$class;
@@ -78,7 +79,8 @@ class CController extends CObject
 		else
 		{
 			require_once( $path );
-			$class = &new $cname();
+//modified by akira			$class = &new $cname();
+			$class = new $cname();
 			$this->c[$name]	= $class;
 			if( empty( $this->{$name} ) )	$this->{$name} = &$this->c[$name];
 		}
@@ -249,7 +251,7 @@ class CController extends CObject
 		return $this->db->GetSqlLog();
 	}
 //akira add start
-	function SetSessionstart($value = true)
+	function SetSessionstart($value = TRUE)
 	{
 		$this->sessionstart = $value;
 	}

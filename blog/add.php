@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 //設定ファイルとフレームワークを読み込む
     require_once( "./config/config.php" );
     require_once( "../cheetan/cheetan.php" );
@@ -22,4 +22,3 @@ function action( &$c )
 	$c->SetViewFile( "./view/add.html");
 
 }
-?>

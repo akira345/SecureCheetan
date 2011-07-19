@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 //ちいたんのビュークラスを拡張する。
     class CMyView extends CView
     {
@@ -37,4 +37,4 @@
 			}
 		}
     }
-?>
+

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /*-----------------------------------------------------------------------------
 cheetan is licensed under the MIT license.
 copyright (c) 2006 cheetan all right reserved.
@@ -61,7 +61,7 @@ class CDispatch extends CObject
 		{
 //akira modified start
 			if (function_exists( 'before_session_start' )){
-				after_session_start( $controller);
+				before_session_start( $controller);
 			}
 			$controller->SetSessionstart();
 // akira modified end

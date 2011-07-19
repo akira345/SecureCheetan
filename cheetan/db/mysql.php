@@ -1,9 +1,9 @@
-﻿<?php
+<?php
 /*-----------------------------------------------------------------------------
 cheetan is licensed under the MIT license.
 copyright (c) 2006 cheetan all right reserved.
 http://php.cheetan.net/
-modified By akira 2011
+modified by akira 2011
 -----------------------------------------------------------------------------*/
 class CDBMysql extends CDBCommon {
 

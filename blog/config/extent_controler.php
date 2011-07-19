@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 //ちいたんのコントローラクラスを拡張する。
 class CMyController extends CController
 {
@@ -96,7 +96,7 @@ class CMyController extends CController
 		//出力時にhtmlentitiesを通す。ただし、
 		//タグ出力フラグがONの場合はスルーする
 		If ($out_tag_flg == FALSE){
-			$this->variables[$name] = $this->setEscape($value);
+			$this->variables[$name] = $this->_setEscape($value);
 		}else{
 			$this->variables[$name]	= $value;
 		}
@@ -148,7 +148,7 @@ class CMyController extends CController
      * 
      * 
      */
-	private function RequestHandle()
+	public function RequestHandle()
 	{
 		$get	 = $this->_validate($_GET);
 		$post	 = $this->_validate($_POST);
@@ -182,7 +182,7 @@ class CMyController extends CController
 		if (is_string($value) === true) {
 			$value = str_replace("\0","",$value);
 		} elseif (is_array($value) === true) {
-			$value = array_map(array($this,"delete_null_byte"),$value);
+			$value = array_map(array($this,"_delete_null_byte"),$value);
 		}
 		return $value;
 	}
@@ -322,4 +322,3 @@ class CMyController extends CController
 }
 
 
-?>

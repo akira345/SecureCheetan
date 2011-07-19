@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 //ちいたんのバリデートクラスを拡張する。
 class CMyValidate extends CValidate
 {
@@ -18,4 +18,3 @@ class CMyValidate extends CValidate
 }
 
 
-?>
