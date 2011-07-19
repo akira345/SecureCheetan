@@ -5,7 +5,7 @@
 //使用したくない時は関数を宣言し、falseを返してください。
 function is_session()
 {
-	return true;
+	return false;
 }
 
 //DBの接続設定関数
