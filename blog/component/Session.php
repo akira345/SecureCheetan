@@ -63,19 +63,18 @@ class Session
      * @return boolian
      *  
      */	
-	 function chk_sessionid()
+	private function chk_sessionid()
 	{
 		//http://www.asahi-net.or.jp/~wv7y-kmr/memo/php_security.html#PHP_Sessionより
 		//セッションIDの妥当性をチェックする。
 		$session_id = session_id();
-		If (preg_match( '/^[-,0-9a-zA-Z]+$/D', $session_id )) {
+		If (preg_match( '/^[-,0-9a-fA-Z]+$/D', $session_id )) {
 			return TRUE;
 		} 
 		elseif ( $session_id === ""){
 			return TRUE;
 		}
 		else {
-echo $session_id;
 			trigger_error( 'Session ID is invalid.', E_USER_ERROR );
 			exit;
 		}
@@ -117,7 +116,7 @@ echo $session_id;
      */
 	function chk_session()
 	{
-		if ($this->chk_sessionid()){
+		if ($this->chk_sessionid){
 			$fingerprint = $this->get_fingerprint();
 			if (($this->get('_fingerprint')))
 			{
